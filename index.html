@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmiOpen - El Último Grand Slam</title>
+    <meta name="description" content="Sitio web oficial del torneo EmiOpen, mucho más que tenis. Torneos masculinos y femeninos en Buenos Aires con categorías A, B y C. Sedes en Club Alvear y Club Chicago.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+        
+        .tennis-ball {
+            width: 120px;
+            height: 120px;
+            background: #f4d03f;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto 2rem;
+            border: 3px solid #fff;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        
+        .tennis-ball::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+            transform: translateY(-50%);
+        }
+        
+        .tennis-ball::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            background: #fff;
+            border-radius: 2px;
+            transform: translateX(-50%) rotate(45deg);
+        }
+        
+        .section-title {
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-green-custom {
+            color: #27ae60;
+        }
+        
+        .text-orange-custom {
+            color: #e67e22;
+        }
+        
+        .bg-green-custom {
+            background-color: #27ae60;
+        }
+        
+        .bg-orange-custom {
+            background-color: #e67e22;
+        }
+        
+        .quote-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: rotate(-2deg);
+        }
+        
+        .quote-card:nth-child(even) {
+            transform: rotate(2deg);
+        }
+        
+        .category-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .sede-card {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-item {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 0.5rem;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .sponsor-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            padding: 3rem;
+            margin: 1rem;
+            text-align: center;
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .contact-form {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .news-card {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .floating-element {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .floating-element:hover {
+            transform: scale(1.1);
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, #f39c12, #e74c3c, #27ae60);
+            margin: 3rem 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-tennis-ball text-3xl text-orange-custom"></i>
+                    <h1 class="text-2xl font-bold text-green-custom">EmiOpen</h1>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#inicio" class="text-gray-700 hover:text-orange-custom transition duration-300">Inicio</a>
+                    <a href="#torneo" class="text-gray-700 hover:text-orange-custom transition duration-300">El Torneo</a>
+                    <a href="#categorias" class="text-gray-700 hover:text-orange-custom transition duration-300">Categorías</a>
+                    <a href="#sedes" class="text-gray-700 hover:text-orange-custom transition duration-300">Sedes</a>
+                    <a href="#quienes-somos" class="text-gray-700 hover:text-orange-custom transition duration-300">Quiénes Somos</a>
+                    <a href="#galeria" class="text-gray-700 hover:text-orange-custom transition duration-300">Galería</a>
+                    <a href="#frases" class="text-gray-700 hover:text-orange-custom transition duration-300">Frases</a>
+                    <a href="#noticias" class="text-gray-700 hover:text-orange-custom transition duration-300">Noticias</a>
+                    <a href="#sponsors" class="text-gray-700 hover:text-orange-custom transition duration-300">Sponsors</a>
+                    <a href="#contacto" class="text-gray-700 hover:text-orange-custom transition duration-300">Contacto</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-bg min-h-screen flex items-center justify-center text-center text-white pt-20">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="tennis-ball"></div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">EmiOpen</h1>
+            <h2 class="text-2xl md:text-3xl font-light mb-8 text-orange-custom">El Último Grand Slam</h2>
+            <p class="text-xl md:text-2xl mb-8 text-green-custom font-medium">Mucho más que tenis</p>
+            <p class="text-lg md:text-xl mb-12 text-gray-200 italic">
+                "Vamos a organizar un torneo que sería considerado una locura por cualquiera en sus cabales. Así que olvídense de sus cabales..."
+            </p>
+            <button class="btn-primary text-lg">
+                <i class="fas fa-play mr-2"></i>
+                Comenzar la Aventura
+            </button>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- El Torneo Section -->
+    <section id="torneo" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title">El Torneo</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-purple-400 to-pink-400 rounded-2xl p-8 text-white">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-seedling text-5xl mb-4"></i>
+                        <h3 class="text-2xl font-bold">Los Comienzos</h3>
+                    </div>
+                    <p class="text-lg leading-relaxed">
+                        Todo comenzó como una idea loca en 2019. Un grupo de amigos apasionados por el tenis decidió crear algo diferente: un torneo que fuera más que competencia, que fuera una experiencia inolvidable. Con canchas prestadas y mucha ilusión, nació EmiOpen.
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-400 to-teal-400 rounded-2xl p-8 text-white">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-chart-line text-5xl mb-4"></i>
+                        <h3 class="text-2xl font-bold">Crecimiento</h3>
+                    </div>
+                    <p class="text-lg leading-relaxed">
+                        De 8 jugadores en el primer torneo a más de 200 participantes actuales. EmiOpen creció exponencialmente, agregando categorías femeninas, múltiples sedes y convirtiéndose en el evento más esperado del año para los tenistas amateur de Buenos Aires.
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-orange-400 to-red-400 rounded-2xl p-8 text-white">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-trophy text-5xl mb-4"></i>
+                        <h3 class="text-2xl font-bold">Actualidad</h3>
+                    </div>
+                    <p class="text-lg leading-relaxed">
+                        Hoy, EmiOpen es reconocido como "El Último Grand Slam" - el torneo que cierra el año con la mayor intensidad emocional. Con sedes en clubes prestigiosos y una organización impecable, mantiene su esencia: ser mucho más que tenis.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <blockquote class="text-2xl md:text-3xl font-light italic text-gray-600 mb-8">
+                    "La diferencia entre ganar y perder consiste en no abandonar."
+                </blockquote>
+                <p class="text-lg text-green-custom font-semibold">#EmiOpen - #ElÚltimoGrandSlam</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Categorías Section -->
+    <section id="categorias" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title">Categorías</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Masculino -->
+                <div class="text-center">
+                    <div class="bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl p-8 mb-8">
+                        <i class="fas fa-male text-6xl text-white mb-4"></i>
+                        <h3 class="text-3xl font-bold text-white mb-6">Masculino</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="category-card">
+                                <h4 class="text-2xl font-bold text-white mb-2">Categoría A</h4>
+                                <p class="text-white opacity-90">Jugadores avanzados con gran experiencia competitiva</p>
+                                <div class="mt-4 text-yellow-300 font-bold">
+                                    <i class="fas fa-star"></i> Nivel Elite
+                                </div>
+                            </div>
+                            
+                            <div class="category-card">
+                                <h4 class="text-2xl font-bold text-white mb-2">Categoría B</h4>
+                                <p class="text-white opacity-90">Jugadores intermedios con buen dominio técnico</p>
+                                <div class="mt-4 text-yellow-300 font-bold">
+                                    <i class="fas fa-star"></i> Nivel Intermedio
+                                </div>
+                            </div>
+                            
+                            <div class="category-card">
+                                <h4 class="text-2xl font-bold text-white mb-2">Categoría C</h4>
+                                <p class="text-white opacity-90">Jugadores principiantes con ganas de crecer</p>
+                                <div class="mt-4 text-yellow-300 font-bold">
+                                    <i class="fas fa-star"></i> Nivel Principiante
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Femenino -->
+                <div class="text-center">
+                    <div class="bg-gradient-to-br from-pink-600 to-rose-600 rounded-2xl p-8 mb-8">
+                        <i class="fas fa-female text-6xl text-white mb-4"></i>
+                        <h3 class="text-3xl font-bold text-white mb-6">Femenino</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="category-card">
+                                <h4 class="text-2xl font-bold text-white mb-2">Categoría A</h4>
+                                <p class="text-white opacity-90">Jugadoras avanzadas con gran experiencia competitiva</p>
+                                <div class="mt-4 text-yellow-300 font-bold">
+                                    <i class="fas fa-star"></i> Nivel Elite
+                                </div>
+                            </div>
+                            
+                            <div class="category-card">
+                                <h4 class="text-2xl font-bold text-white mb-2">Categoría B</h4>
+                                <p class="text-white opacity-90">Jugadoras intermedias con buen dominio técnico</p>
+                                <div class="mt-4 text-yellow-300 font-bold">
+                                    <i class="fas fa-star"></i> Nivel Intermedio
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <p class="text-xl md:text-2xl font-semibold text-orange-custom mb-4">
+                    "Si puedes soñarlo, puedes lograrlo."
+                </p>
+                <button class="btn-primary">
+                    <i class="fas fa-user-plus mr-2"></i>
+                    Inscribirse Ahora
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Sedes Section -->
+    <section id="sedes" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title">Sedes</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Club Alvear -->
+                <div class="sede-card">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-building text-5xl text-white mb-4"></i>
+                        <h3 class="text-3xl font-bold text-white">Club Alvear</h3>
+                        <p class="text-white opacity-90 text-lg">Parque Avellaneda, Buenos Aires</p>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-20 rounded-xl p-6 mb-6">
+                        <h4 class="text-xl font-bold text-white mb-4">Instalaciones</h4>
+                        <ul class="text-white space-y-2">
+                            <li><i class="fas fa-check mr-2"></i>4 canchas de tenis profesionales</li>
+                            <li><i class="fas fa-check mr-2"></i>Iluminación nocturna</li>
+                            <li><i class="fas fa-check mr-2"></i>Vestuarios completos</li>
+                            <li><i class="fas fa-check mr-2"></i>Cafetería y restaurante</li>
+                            <li><i class="fas fa-check mr-2"></i>Estacionamiento amplio</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-20 rounded-xl p-6">
+                        <h4 class="text-xl font-bold text-white mb-4">Ubicación</h4>
+                        <p class="text-white mb-4">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            Av. Directorio 1234, Parque Avellaneda, CABA
+                        </p>
+                        <div class="bg-gray-200 rounded-lg p-4 text-gray-700">
+                            <p class="text-sm">📍 Mapa interactivo disponible en Google Maps</p>
+                            <p class="text-sm mt-2">🚇 Cerca de estación Parque Avellaneda</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Club Chicago -->
+                <div class="sede-card">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-building text-5xl text-white mb-4"></i>
+                        <h3 class="text-3xl font-bold text-white">Club Chicago</h3>
+                        <p class="text-white opacity-90 text-lg">Mataderos, Buenos Aires</p>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-20 rounded-xl p-6 mb-6">
+                        <h4 class="text-xl font-bold text-white mb-4">Instalaciones</h4>
+                        <ul class="text-white space-y-2">
+                            <li><i class="fas fa-check mr-2"></i>6 canchas de tenis de alta calidad</li>
+                            <li><i class="fas fa-check mr-2"></i>Superficie de polvo de ladrillo</li>
+                            <li><i class="fas fa-check mr-2"></i>Vestuarios y duchas</li>
+                            <li><i class="fas fa-check mr-2"></i>Bar y zona de descanso</li>
+                            <li><i class="fas fa-check mr-2"></i>Área de calentamiento</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-20 rounded-xl p-6">
+                        <h4 class="text-xl font-bold text-white mb-4">Ubicación</h4>
+                        <p class="text-white mb-4">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            Av. Eva Perón 5678, Mataderos, CABA
+                        </p>
+                        <div class="bg-gray-200 rounded-lg p-4 text-gray-700">
+                            <p class="text-sm">📍 Mapa interactivo disponible en Google Maps</p>
+                            <p class="text-sm mt-2">🚌 Múltiples líneas de colectivos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <p class="text-xl md:text-2xl font-semibold text-green-custom mb-4">
+                    "No vayan por donde el camino los lleve, vayan por donde no hay camino y dejen huella"
+                </p>
+                <button class="btn-primary">
+                    <i class="fas fa-map mr-2"></i>
+                    Ver Ubicaciones
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Quiénes Somos Section -->
+    <section id="quienes-somos" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title">Quiénes Somos</h2>
+            
+            <div class="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-3xl p-8 md:p-12 text-white">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-1/3 text-center">
+                        <div class="w-48 h-48 bg-yellow-400 rounded-full mx-auto mb-6 flex items-center justify-center">
+                            <i class="fas fa-user-tie text-6xl text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-2">Emiliano</h3>
+                        <p class="text-xl opacity-90">Fundador y Director</p>
+                    </div>
+                    
+                    <div class="md:w-2/3">
+                        <div class="space-y-6 text-lg leading-relaxed">
+                            <p>
+                                Emiliano nació en Buenos Aires en 1988, y desde pequeño tuvo una relación... digamos "complicada" con el tenis. Su primer encuentro con una raqueta fue a los 7 años, cuando intentó usarla como espada en un duelo épico contra su hermano menor. Resultado: raqueta rota y una promesa de sus padres de que "jamás volvería a tocar una raqueta".
+                            </p>
+                            
+                            <p>
+                                Pero el destino es caprichoso. A los 15 años, durante unas vacaciones en Mar del Plata, Emiliano se encontró con una pelota de tenis perdida en la playa. Al intentar devolverla a su dueño, comenzó a hacer malabares con ella (había aprendido en el colegio) y terminó atrayendo a una multitud. Entre los espectadores estaba Don Carlos, un ex-tenista profesional que vio "algo especial" en ese chico que hacía malabares con una pelota de tenis.
+                            </p>
+                            
+                            <p>
+                                Don Carlos se convirtió en su mentor y le enseñó no solo a jugar tenis, sino a amarlo. Emiliano descubrió que el tenis era mucho más que un deporte: era una metáfora de la vida, donde cada punto era una nueva oportunidad de superarse.
+                            </p>
+                            
+                            <p>
+                                La idea del EmiOpen nació en 2019, durante una parrillada con amigos. Emiliano estaba contando la historia de cómo un ex-tenista profesional le cambió la vida, cuando alguien gritó: "¡Che, Emi! ¿Por qué no organizas un torneo?" Entre risas y vino, nació la idea más loca de todas: crear un torneo que fuera "mucho más que tenis".
+                            </p>
+                            
+                            <p>
+                                Hoy, Emiliano dirige el EmiOpen con la misma pasión con la que hacía malabares en la playa. Su filosofía es simple: "Si no estás profundamente apasionado por lo que haces, no vas a tener la perseverancia para aguantar". Y así, con perseverancia y mucha pasión, convirtió una idea loca en el torneo más esperado del año.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-8 p-6 bg-white bg-opacity-20 rounded-xl">
+                            <h4 class="text-xl font-bold mb-4">La Filosofía EmiOpen</h4>
+                            <p class="text-lg italic">
+                                "Creemos que el tenis es el vehículo, pero el verdadero objetivo es crear momentos inolvidables, forjar amistades y demostrar que los sueños más locos pueden volverse realidad cuando se combinan con trabajo duro y mucha diversión."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Galería Section -->
+    <section id="galeria" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title">Galería</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="gallery-item">
+                    <div class="text-center">
+                        <i class="fas fa-trophy text-6xl mb-4"></i>
+                        <p>Ceremonia de Premiación 2023</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="text-center">
+                        <i class="fas fa-users text-6xl mb-4"></i>
+                        <p>Momentos entre Amigos</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="text-center">
+                        <i class="fas fa-tennis-ball text-6xl mb-4"></i>
+                        <p>Acción en Cancha</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="text-center">
+                        <i class="fas fa-camera text-6xl mb-4"></i>
+                        <p>Detrás de Cámaras</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="text-center">
+                        <i class="fas fa-heart text-6xl mb-4"></i>
+                        <p>Emociones Puras</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="text-center">
+                        <i class="fas fa-star text-6xl mb-4"></i>
+                        <p>Momentos Destacados</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <p class="text-xl md:text-2xl font-semibold text-orange-custom mb-4">
+                    "El hombre que mueve montañas comienza cargando pequeñas piedras."
+                </p>
+                <button class="btn-primary">
+                    <i class="fas fa-images mr-2"></i>
+                    Ver Más Fotos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Frases Inspiradoras Section -->
+    <section id="frases" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title">Frases Inspiradoras</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="quote-card">
+                    <i class="fas fa-quote-left text-3xl mb-4 opacity-70"></i>
+                    <p class="text-lg font-medium mb-4">
+                        "Un pesimista ve la dificultad en cada oportunidad; un optimista ve la oportunidad en cada dificultad."
+                    </p>
+                    <div class="text-right">
+                        <span class="text-sm opacity-70">#EmiOpen</span>
+                    </div>
+                </div>
+                
+                <div class="quote-card">
+                    <i class="fas fa-quote-left text-3xl mb-4 opacity-70"></i>
+                    <p class="text-lg font-medium mb-4">
+                        "Lo importante no es si te derriban, sino si te levantas."
+                    </p>
+                    <div class="text-right">
+                        <span class="text-sm opacity-70">#EmiOpen</span>
+                    </div>
+                </div>
+                
+                <div class="quote-card">
+                    <i class="fas fa-quote-left text-3xl mb-4 opacity-70"></i>
+                    <p class="text-lg font-medium mb-4">
+                        "El único lugar donde el éxito está antes que el trabajo, es en el diccionario."
+                    </p>
+                    <div class="text-right">
+                        <span class="text-sm opacity-70">#EmiOpen</span>
+                    </div>
+                </div>
+                
+                <div class="quote-card">
+                    <i class="fas fa-quote-left text-3xl mb-4 opacity-70"></i>
+                    <p class="text-lg font-medium mb-4">
+                        "Si no estás profundamente apasionado por lo que haces, no vas a tener la perseverancia para aguantar."
+                    </p>
+                    <div class="text-right">
+                        <span class="text-sm opacity-70">#EmiOpen</span>
+                    </div>
+                </div>
+                
+                <div class="quote-card">
+                    <i class="fas fa-quote-left text-3xl mb-4 opacity-70"></i>
+                    <p class="text-lg font-medium mb-4">
+                        "No se rindan todo llega con trabajo, tiempo y convicción."
+                    </p>
+                    <div class="text-right">
+                        <span class="text-sm opacity-70">#EmiOpen</span>
+                    </div>
+                </div>
+                
+                <div class="quote-card">
+                    <i class="fas fa-quote-left text-3xl mb-4 opacity-70"></i>
+                    <p class="text-lg font-medium mb-4">
+                        "La diferencia entre ganar y perder consiste en no abandonar."
+                    </p>
+                    <div class="text-right">
+                        <span class="text-sm opacity-70">#EmiOpen</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <p class="text-2xl md:text-3xl font-bold text-green-custom mb-4">
+                    Mucho más que tenis. 🎾
+                </p>
+                <p class="text-lg text-gray-600">
+                    Cada frase es una inspiración, cada partido una oportunidad de crecimiento.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Noticias Section -->
+    <section id="noticias" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title">Noticias</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="news-card">
+                    <div class="mb-4">
+                        <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">DESTACADO</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Luis Loza se Corona Campeón 2023</h3>
+                    <p class="text-gray-600 mb-4">
+                        En una final épica que duró más de 3 horas, Luis Loza demostró por qué es considerado un verdadero campeón con todas las letras.
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        <i class="fas fa-calendar mr-2"></i>15 de Diciembre, 2023
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <div class="mb-4">
+                        <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold">PRÓXIMAMENTE</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Anuncio de Fechas EmiOpen 2024</h3>
+                    <p class="text-gray-600 mb-4">
+                        Se acerca la nueva edición del torneo más esperado. Prepárate para vivir otra experiencia inolvidable.
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        <i class="fas fa-calendar mr-2"></i>Próximamente
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <div class="mb-4">
+                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">ACTUALIZACIÓN</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Nuevas Instalaciones en Club Chicago</h3>
+                    <p class="text-gray-600 mb-4">
+                        El Club Chicago renovó completamente sus instalaciones para brindar la mejor experiencia a todos los participantes.
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        <i class="fas fa-calendar mr-2"></i>10 de Enero, 2024
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <p class="text-xl md:text-2xl font-semibold text-orange-custom mb-4">
+                    "Si puedes soñarlo, puedes lograrlo."
+                </p>
+                <button class="btn-primary">
+                    <i class="fas fa-newspaper mr-2"></i>
+                    Ver Todas las Noticias
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Sponsors Section -->
+    <section id="sponsors" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title">Sponsors</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <div class="sponsor-card">
+                    <i class="fas fa-tennis-ball text-4xl mb-4 text-orange-500"></i>
+                    <p>Wilson</p>
+                </div>
+                
+                <div class="sponsor-card">
+                    <i class="fas fa-tshirt text-4xl mb-4 text-blue-500"></i>
+                    <p>Nike</p>
+                </div>
+                
+                <div class="sponsor-card">
+                    <i class="fas fa-shoe-prints text-4xl mb-4 text-red-500"></i>
+                    <p>Adidas</p>
+                </div>
+                
+                <div class="sponsor-card">
+                    <i class="fas fa-trophy text-4xl mb-4 text-yellow-500"></i>
+                    <p>Head</p>
+                </div>
+                
+                <div class="sponsor-card">
+                    <i class="fas fa-water text-4xl mb-4 text-blue-400"></i>
+                    <p>Powerade</p>
+                </div>
+                
+                <div class="sponsor-card">
+                    <i class="fas fa-utensils text-4xl mb-4 text-green-500"></i>
+                    <p>Subway</p>
+                </div>
+                
+                <div class="sponsor-card">
+                    <i class="fas fa-car text-4xl mb-4 text-gray-600"></i>
+                    <p>Uber</p>
+                </div>
+                
+                <div class="sponsor-card">
+                    <i class="fas fa-plus text-4xl mb-4 text-gray-400"></i>
+                    <p>Tu Marca Aquí</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <p class="text-xl md:text-2xl font-semibold text-green-custom mb-4">
+                    ¿Quieres ser parte de la familia EmiOpen?
+                </p>
+                <button class="btn-primary">
+                    <i class="fas fa-handshake mr-2"></i>
+                    Ser Sponsor
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title">Contacto</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="contact-form">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800">Envíanos un mensaje</h3>
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Nombre</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Tu nombre completo">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="tu@email.com">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Teléfono</label>
+                            <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="+54 11 1234-5678">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Mensaje</label>
+                            <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Cuéntanos qué necesitas..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="bg-gradient-to-br from-green-400 to-teal-500 rounded-2xl p-8 text-white">
+                        <h3 class="text-2xl font-bold mb-6">Información de Contacto</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Email</h4>
+                                    <p class="opacity-90"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5bcbbb3ba95b0b8bcbaa5b0bbfbb6bab8">[email&#160;protected]</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <i class="fab fa-instagram text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Instagram</h4>
+                                    <p class="opacity-90">@emi.open</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <i class="fas fa-phone text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Teléfono</h4>
+                                    <p class="opacity-90">+54 11 1234-5678</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl p-8 text-white">
+                        <h3 class="text-2xl font-bold mb-4">Síguenos</h3>
+                        <p class="mb-6 opacity-90">
+                            Mantente al día con todas las novedades del EmiOpen siguiéndonos en nuestras redes sociales.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="https://www.instagram.com/emi.open/" target="_blank" class="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-3 transition duration-300">
+                                <i class="fab fa-instagram text-2xl"></i>
+                            </a>
+                            <a href="#" class="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-3 transition duration-300">
+                                <i class="fab fa-facebook text-2xl"></i>
+                            </a>
+                            <a href="#" class="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-3 transition duration-300">
+                                <i class="fab fa-twitter text-2xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <p class="text-xl md:text-2xl font-semibold text-orange-custom mb-4">
+                    "El hombre que mueve montañas comienza cargando pequeñas piedras."
+                </p>
+                <p class="text-lg text-gray-600">
+                    ¡Contáctanos y sé parte de la próxima edición del EmiOpen!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i class="fas fa-tennis-ball text-3xl text-orange-custom"></i>
+                        <h3 class="text-2xl font-bold">EmiOpen</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        El último grand slam del año. Mucho más que tenis.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#torneo" class="hover:text-orange-custom transition duration-300">El Torneo</a></li>
+                        <li><a href="#categorias" class="hover:text-orange-custom transition duration-300">Categorías</a></li>
+                        <li><a href="#sedes" class="hover:text-orange-custom transition duration-300">Sedes</a></li>
+                        <li><a href="#contacto" class="hover:text-orange-custom transition duration-300">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Sedes</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Club Alvear - Parque Avellaneda</li>
+                        <li>Club Chicago - Mataderos</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1b72757d745b7e7672746b7e7535787476">[email&#160;protected]</a></li>
+                        <li>@emi.open</li>
+                        <li>+54 11 1234-5678</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 EmiOpen. Todos los derechos reservados.</p>
+                <p class="mt-2 text-sm">Desarrollado con 💚 para la comunidad tenística de Buenos Aires</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="floating-element" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            // Add mobile menu functionality here
+            alert('Menú móvil - Funcionalidad a implementar');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
+            this.reset();
+        });
+
+        // Add animation on scroll
+        window.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.category-card, .sede-card, .quote-card, .gallery-item');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialize elements with fade-in animation
+        const animatedElements = document.querySelectorAll('.category-card, .sede-card, .quote-card, .gallery-item');
+        animatedElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+    </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"95b348db89b4ca5d","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.6.2","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
+</body>
+</html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDmE7SA%2BmcQKsjQ%2Fy1Mu4RpuH3D2n4Y%2FuAfE8eGGwcBPgnclpQPVLB0k08HfyJWT4eywiB%2FdIA7TCcAJZ7ZSze6VJSIaf6xZXplTHshUz3l5fBK8yRD5p0JkLyTbl%2F%2BGIWDX%2F9hIuxJ1yuIv%2FMk%2BGeUZReDsmEM9sTEpmKCoxJzIkgqGpOdaMN5S%2BjNkNVz0i7muO476COoh0TcJHYxU77VTP5A7D8H%2F1ddT24KZPe0sGuc7qMmpxYCMgCmDkX8im0rG5FBAWWYRCwM1ZEzRixSY%2Fm4zd2x5NCAH07C11Eisu9wss%2BxqAQ7HX3vv%2FRA1ui%2F5aK8lol7Y3XFxwwEraf%2F8%2F7KK%2FD6CkHaeQutwIaskRsJvyNztPhhTL2AdN9p504Sghbp7PW%2FLnnU7tTZZyseuwdPaaxURShADj7T6dersSkJkUTcnKwx5VuqzgP9vT2XMG19NV9W52jqSvZr0%2BZ%2FSlh1HmVoQTlKePQ4gdsRtQju7BX7VC0XK4gyO%2FJVYtgQ%3D%3D";
+        window.__genspark_locale = "es-ES";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDmE7SA+mcQKsjQ/y1Mu4RpuH3D2n4Y/uAfE8eGGwcBPgnclpQPVLB0k08HfyJWT4eywiB/dIA7TCcAJZ7ZSze6VJSIaf6xZXplTHshUz3l5fBK8yRD5p0JkLyTbl/+GIWDX/9hIuxJ1yuIv/Mk+GeUZReDsmEM9sTEpmKCoxJzIkgqGpOdaMN5S+jNkNVz0i7muO476COoh0TcJHYxU77VTP5A7D8H/1ddT24KZPe0sGuc7qMmpxYCMgCmDkX8im0rG5FBAWWYRCwM1ZEzRixSY/m4zd2x5NCAH07C11Eisu9wss+xqAQ7HX3vv/RA1ui/5aK8lol7Y3XFxwwEraf/8/7KK/D6CkHaeQutwIaskRsJvyNztPhhTL2AdN9p504Sghbp7PW/LnnU7tTZZyseuwdPaaxURShADj7T6dersSkJkUTcnKwx5VuqzgP9vT2XMG19NV9W52jqSvZr0+Z/Slh1HmVoQTlKePQ4gdsRtQju7BX7VC0XK4gyO/JVYtgQ==";
+    </script>
+    
+    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
+    
